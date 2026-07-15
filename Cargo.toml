@@ -1,0 +1,10 @@
+[workspace]
+members = ["cubar-core", "cubar-cli"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["cubar-rs developers"]
+repository = "https://github.com/user/cubar-rs"
