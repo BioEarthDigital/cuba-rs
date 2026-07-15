@@ -7,16 +7,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 cargo build                    # debug build
 cargo build --release          # release build (for benchmarking)
-cargo test                     # run all tests (22 tests across cubar-core)
-cargo test -p cubar-core       # run only library tests
-cargo test -p cubar-core enc   # run tests matching "enc"
+cargo test                     # run all tests (22 tests across cuba-core)
+cargo test -p cuba-core       # run only library tests
+cargo test -p cuba-core enc   # run tests matching "enc"
 ```
 
 ## Architecture
 
 Cargo workspace with two crates:
 
-**`cubar-core`** (library) — All computation logic. No CLI awareness.
+**`cuba-core`** (library) — All computation logic. No CLI awareness.
 - `genetic_code.rs` — `CodonTable` struct; 27 NCBI genetic codes stored as `HashMap<String, CodonInfo>`. The central data structure. `subfamily_groups()` partitions codons by first-2-bases + amino acid (e.g., Leu_TT, Leu_CT), which feeds all metrics.
 - `sequence.rs` — `CdsSeq` (id + seq bytes + codon triplets), `CodonFreqMatrix` (genes × codons f64 matrix). FASTA I/O via `needletail`. `check_cds()` skips sequences with internal stop codons.
 - `metrics/enc.rs` — ENC algorithm matches cubar R exactly: groups codons by subfamily, computes `p = (count+1)/(n+k)` pseudo-corrected frequencies, then `N_d = n_groups × Σn / Σ(n×f)` per degeneracy class. Sum across classes gives ENC.
@@ -26,7 +26,7 @@ Cargo workspace with two crates:
 - `optimize.rs` — `est_optimal_codons()` picks highest-count codon per subfamily. `codon_optimize()` replaces each codon with its optimal synonym.
 - `slide.rs` — Sliding window over `CdsSeq.codons`, re-counts codons per window and computes metrics.
 
-**`cubar-cli`** (binary) — Thin CLI layer. Each subcommand file in `commands/` follows the same pattern: load codon table → load FASTA → count codons → compute metric → write CSV/TSV/JSON via `write_results()`.
+**`cuba-cli`** (binary) — Thin CLI layer. Each subcommand file in `commands/` follows the same pattern: load codon table → load FASTA → count codons → compute metric → write CSV/TSV/JSON via `write_results()`.
 
 ## Key Design Patterns
 

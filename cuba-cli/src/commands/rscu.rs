@@ -26,8 +26,8 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let cf = cubar_core::sequence::count_codons(&cds, &ct);
-    let rscu = cubar_core::metrics::rscu::est_rscu(
+    let cf = cuba_core::sequence::count_codons(&cds, &ct);
+    let rscu = cuba_core::metrics::rscu::est_rscu(
         &cf, None, args.pseudo_cnt, &ct, &args.level, args.incl_stop,
     );
 

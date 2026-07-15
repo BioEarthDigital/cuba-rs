@@ -19,7 +19,7 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let cf = cubar_core::sequence::count_codons(&cds, &ct);
+    let cf = cuba_core::sequence::count_codons(&cds, &ct);
 
     // Read optimal codons from file
     let content = std::fs::read_to_string(&args.optimal_codons)?;
@@ -30,7 +30,7 @@ pub fn run(
         .map(|l| (l, true))
         .collect();
 
-    let fop = cubar_core::metrics::fop::get_fop(&cf, &optimal, &ct);
+    let fop = cuba_core::metrics::fop::get_fop(&cf, &optimal, &ct);
 
     let headers = vec!["gene_id".to_string(), "fop".to_string()];
     let rows: Vec<Vec<String>> = cf

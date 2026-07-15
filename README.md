@@ -1,9 +1,9 @@
-# cubar-rs
+# cuba-rs
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.75%2B-orange.svg)](https://www.rust-lang.org)
 
-**cubar-rs** 是一个用 Rust 编写的高性能密码子使用偏好性（Codon Usage Bias）分析工具，功能上参考了 R 包 [cubar](https://github.com/mt1022/cubar)，在保持计算结果一致的同时，提供更快的启动速度和更低的内存占用。
+**cuba-rs** 是一个用 Rust 编写的高性能密码子使用偏好性（Codon Usage Bias）分析工具，功能上参考了 R 包 [cubar](https://github.com/mt1022/cubar)，在保持计算结果一致的同时，提供更快的启动速度和更低的内存占用。
 
 ## 功能特性
 
@@ -19,62 +19,62 @@
 ### 从源码编译
 
 ```bash
-git clone https://github.com/user/cubar-rs.git
-cd cubar-rs
+git clone https://github.com/BioEarthDigital/cuba-rs.git
+cd cuba-rs
 cargo build --release
 ```
 
-编译后的二进制文件位于 `target/release/cubar`，可直接复制到任意 `$PATH` 目录。
+编译后的二进制文件位于 `target/release/cuba-rs`，可直接复制到任意 `$PATH` 目录。
 
 ### 预编译二进制（即将提供）
 
 ```bash
 # macOS (Apple Silicon)
-curl -L https://github.com/user/cubar-rs/releases/latest/download/cubar-aarch64-apple-darwin.tar.gz | tar xz
+curl -L https://github.com/BioEarthDigital/cuba-rs/releases/latest/download/cuba-rs-aarch64-apple-darwin.tar.gz | tar xz
 
 # Linux (x86_64)
-curl -L https://github.com/user/cubar-rs/releases/latest/download/cubar-x86_64-unknown-linux-gnu.tar.gz | tar xz
+curl -L https://github.com/BioEarthDigital/cuba-rs/releases/latest/download/cuba-rs-x86_64-unknown-linux-gnu.tar.gz | tar xz
 ```
 
 ## 快速开始
 
 ```bash
 # 查看帮助
-cubar --help
+cuba-rs --help
 
 # 列出所有遗传密码表
-cubar list-codes
+cuba-rs list-codes
 
 # 显示标准密码表
-cubar show-code 1
+cuba-rs show-code 1
 ```
 
 ### 典型分析流程
 
 ```bash
 # 1. 密码子计数
-cubar count cdna.fasta -o codon_counts.csv
+cuba-rs count cdna.fasta -o codon_counts.csv
 
 # 2. 计算有效密码子数（ENC）—— 密码子偏好性总体度量
-cubar enc cdna.fasta -o enc.csv
+cuba-rs enc cdna.fasta -o enc.csv
 
 # 3. 计算相对同义密码子使用度（RSCU）
-cubar rscu cdna.fasta -o rscu.csv
+cuba-rs rscu cdna.fasta -o rscu.csv
 
 # 4. 使用高表达基因作为参考，计算密码子适应指数（CAI）
-cubar cai cdna.fasta -r highly_expressed.fasta -o cai.csv
+cuba-rs cai cdna.fasta -r highly_expressed.fasta -o cai.csv
 
 # 5. GC 含量分析（GC、GC3s、GC4d）
-cubar gc cdna.fasta -o gc.csv
+cuba-rs gc cdna.fasta -o gc.csv
 
 # 6. 识别最优密码子
-cubar optimal cdna.fasta -e expression.tsv -o optimal_codons.csv
+cuba-rs optimal cdna.fasta -e expression.tsv -o optimal_codons.csv
 
 # 7. 密码子优化
-cubar optimize target.fasta -O optimal_codons.txt -o optimized.fasta
+cuba-rs optimize target.fasta -O optimal_codons.txt -o optimized.fasta
 
 # 8. 滑动窗口分析
-cubar slide cdna.fasta -w 20 -s 5 -r ref.fasta -o windows.csv
+cuba-rs slide cdna.fasta -w 20 -s 5 -r ref.fasta -o windows.csv
 ```
 
 ## 命令参考
@@ -200,7 +200,7 @@ AAA
 ```
 CUB/
 ├── Cargo.toml              # workspace
-├── cubar-core/             # 核心计算库
+├── cuba-core/             # 核心计算库
 │   └── src/
 │       ├── genetic_code.rs  # 遗传密码表 (NCBI 1-33)
 │       ├── sequence.rs      # FASTA I/O, CDS 验证
@@ -215,7 +215,7 @@ CUB/
 │       │   └── dp.rs        # DP
 │       ├── optimize.rs      # 密码子优化
 │       └── slide.rs         # 滑动窗口
-├── cubar-cli/               # CLI 二进制
+├── cuba-cli/               # CLI 二进制
 │   └── src/
 │       ├── main.rs
 │       └── commands/        # 各子命令实现
@@ -251,7 +251,7 @@ cargo fmt
 
 ## License
 
-MIT © cubar-rs developers
+MIT © cuba-rs developers
 
 ## 致谢
 

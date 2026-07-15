@@ -34,8 +34,8 @@ pub fn run(
     // Compute RSCU from reference if needed
     let rscu = if let Some(ref_path) = &args.reference {
         let ref_cds = super::load_cds(ref_path, &ct)?;
-        let ref_cf = cubar_core::sequence::count_codons(&ref_cds, &ct);
-        Some(cubar_core::metrics::rscu::est_rscu(
+        let ref_cf = cuba_core::sequence::count_codons(&ref_cds, &ct);
+        Some(cuba_core::metrics::rscu::est_rscu(
             &ref_cf, None, 1.0, &ct, "subfam", false,
         ))
     } else {
@@ -43,7 +43,7 @@ pub fn run(
     };
 
     let metrics: Vec<&str> = args.metric.split(',').collect();
-    let results = cubar_core::slide::slide(
+    let results = cuba_core::slide::slide(
         &cds,
         args.window_size,
         args.step_size,

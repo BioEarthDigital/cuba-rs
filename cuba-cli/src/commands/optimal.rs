@@ -18,7 +18,7 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let cf = cubar_core::sequence::count_codons(&cds, &ct);
+    let cf = cuba_core::sequence::count_codons(&cds, &ct);
 
     let optimal = if let Some(expr_file) = &args.expression {
         // Read expression data
@@ -44,9 +44,9 @@ pub fn run(
             .map(|id| expr_map.get(id).copied().unwrap_or(0.0))
             .collect();
 
-        cubar_core::optimize::est_optimal_codons_with_expression(&cf, &expression, &ct)
+        cuba_core::optimize::est_optimal_codons_with_expression(&cf, &expression, &ct)
     } else {
-        cubar_core::optimize::est_optimal_codons(&cf, &ct)
+        cuba_core::optimize::est_optimal_codons(&cf, &ct)
     };
 
     let headers: Vec<String> = vec!["amino_acid", "aa_code", "optimal_codon"]
@@ -54,7 +54,7 @@ pub fn run(
     let mut rows = Vec::new();
     for (aa, codon) in &optimal.optimal {
         rows.push(vec![
-            cubar_core::genetic_code::aa1_to_aa3(*aa).to_string(),
+            cuba_core::genetic_code::aa1_to_aa3(*aa).to_string(),
             aa.to_string(),
             codon.clone(),
         ]);

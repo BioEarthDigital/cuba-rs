@@ -9,7 +9,7 @@ pub mod optimal;
 pub mod optimize;
 pub mod slide;
 
-use cubar_core::genetic_code::CodonTable;
+use cuba_core::genetic_code::CodonTable;
 
 /// Load a genetic code table by ID
 pub fn load_codon_table(gcid: &str) -> anyhow::Result<CodonTable> {
@@ -18,9 +18,9 @@ pub fn load_codon_table(gcid: &str) -> anyhow::Result<CodonTable> {
 }
 
 /// Read and validate coding sequences from a FASTA file
-pub fn load_cds(path: &str, codon_table: &CodonTable) -> anyhow::Result<Vec<cubar_core::sequence::CdsSeq>> {
-    let seqs = cubar_core::sequence::read_fasta(std::path::Path::new(path))?;
-    cubar_core::sequence::check_cds(seqs, codon_table)
+pub fn load_cds(path: &str, codon_table: &CodonTable) -> anyhow::Result<Vec<cuba_core::sequence::CdsSeq>> {
+    let seqs = cuba_core::sequence::read_fasta(std::path::Path::new(path))?;
+    cuba_core::sequence::check_cds(seqs, codon_table)
 }
 
 /// Write results in CSV, TSV, or JSON format
@@ -104,7 +104,7 @@ pub fn list_codes() -> anyhow::Result<()> {
 
 /// Show a specific genetic code table
 pub mod show_code {
-    use cubar_core::genetic_code::CodonTable;
+    use cuba_core::genetic_code::CodonTable;
 
     #[derive(clap::Args, Clone)]
     pub struct ShowCodeArgs {

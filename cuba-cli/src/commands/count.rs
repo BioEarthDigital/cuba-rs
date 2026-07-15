@@ -18,7 +18,7 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let cf = cubar_core::sequence::count_codons(&cds, &ct);
+    let cf = cuba_core::sequence::count_codons(&cds, &ct);
 
     let mut headers: Vec<String> = vec!["gene_id".to_string()];
     headers.extend(cf.codons.iter().cloned());

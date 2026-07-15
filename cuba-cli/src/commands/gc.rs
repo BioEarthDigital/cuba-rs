@@ -14,8 +14,8 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let cf = cubar_core::sequence::count_codons(&cds, &ct);
-    let gc = cubar_core::metrics::gc::get_all_gc(&cf, &ct);
+    let cf = cuba_core::sequence::count_codons(&cds, &ct);
+    let gc = cuba_core::metrics::gc::get_all_gc(&cf, &ct);
 
     let headers: Vec<String> = vec!["gene_id", "gc", "gc3s", "gc4d"]
         .iter().map(|s| s.to_string()).collect();

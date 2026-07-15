@@ -18,8 +18,8 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let cf = cubar_core::sequence::count_codons(&cds, &ct);
-    let enc = cubar_core::metrics::enc::get_enc(&cf, &ct, &args.level);
+    let cf = cuba_core::sequence::count_codons(&cds, &ct);
+    let enc = cuba_core::metrics::enc::get_enc(&cf, &ct, &args.level);
 
     let headers = vec!["gene_id".to_string(), "enc".to_string()];
     let rows: Vec<Vec<String>> = cf

@@ -1,13 +1,13 @@
 #!/bin/bash
-# Speed benchmark: R cubar vs Rust cubar
+# Speed benchmark: R cubar vs Rust cuba-rs
 set -e
 
 echo "============================================"
-echo "  CUBAR SPEED BENCHMARK: R vs Rust"
+echo "  CUBA-RS SPEED BENCHMARK: R vs Rust"
 echo "============================================"
 echo ""
 
-CUBAR="target/release/cubar"
+CUBAR="target/release/cuba-rs"
 DIR="test_data"
 
 for N in 500 2000 6600; do

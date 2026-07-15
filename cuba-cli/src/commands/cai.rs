@@ -24,15 +24,15 @@ pub fn run(
 
     // Load reference genes and compute RSCU
     let ref_cds = super::load_cds(&args.reference, &ct)?;
-    let ref_cf = cubar_core::sequence::count_codons(&ref_cds, &ct);
-    let rscu = cubar_core::metrics::rscu::est_rscu(
+    let ref_cf = cuba_core::sequence::count_codons(&ref_cds, &ct);
+    let rscu = cuba_core::metrics::rscu::est_rscu(
         &ref_cf, None, 1.0, &ct, &args.level, false,
     );
 
     // Load target genes and compute CAI
     let target_cds = super::load_cds(&args.fasta, &ct)?;
-    let target_cf = cubar_core::sequence::count_codons(&target_cds, &ct);
-    let cai = cubar_core::metrics::cai::get_cai(&target_cf, &rscu, &args.level);
+    let target_cf = cuba_core::sequence::count_codons(&target_cds, &ct);
+    let cai = cuba_core::metrics::cai::get_cai(&target_cf, &rscu, &args.level);
 
     let headers = vec!["gene_id".to_string(), "cai".to_string()];
     let rows: Vec<Vec<String>> = target_cf

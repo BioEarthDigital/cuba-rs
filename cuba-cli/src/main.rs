@@ -13,11 +13,11 @@ use commands::optimize::OptimizeArgs;
 use commands::slide::SlideArgs;
 use commands::show_code::ShowCodeArgs;
 
-/// cubar — Codon Usage Bias Analysis in Rust
+/// cuba-rs — Codon Usage Bias Analysis in Rust
 ///
 /// A fast, memory-efficient tool for analyzing codon usage bias in coding sequences.
 #[derive(Parser)]
-#[command(name = "cubar", version, about, long_about = None)]
+#[command(name = "cuba-rs", version, about, long_about = None)]
 struct Cli {
     /// NCBI genetic code ID (default: 1 = Standard)
     #[arg(short = 'c', long, global = true, default_value = "1")]

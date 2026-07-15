@@ -19,7 +19,7 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let cf = cubar_core::sequence::count_codons(&cds, &ct);
+    let cf = cuba_core::sequence::count_codons(&cds, &ct);
 
     // Read tRNA weights from file
     let content = std::fs::read_to_string(&args.trna_file)?;
@@ -37,7 +37,7 @@ pub fn run(
         }
     }
 
-    let tai = cubar_core::metrics::tai::get_tai(&cf, &trna_weights, &ct, None);
+    let tai = cuba_core::metrics::tai::get_tai(&cf, &trna_weights, &ct, None);
 
     let headers = vec!["gene_id".to_string(), "tai".to_string()];
     let rows: Vec<Vec<String>> = cf

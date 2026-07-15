@@ -22,7 +22,7 @@ pub fn run(
 ) -> anyhow::Result<()> {
     let ct = super::load_codon_table(gcid)?;
     let cds = super::load_cds(&args.fasta, &ct)?;
-    let _cf = cubar_core::sequence::count_codons(&cds, &ct);
+    let _cf = cuba_core::sequence::count_codons(&cds, &ct);
 
     // Read optimal codons from file
     let content = std::fs::read_to_string(&args.optimal_codons)?;
@@ -43,7 +43,7 @@ pub fn run(
         }
     }
 
-    let opt_table = cubar_core::optimize::OptimalCodonTable { optimal, optimal_list };
+    let opt_table = cuba_core::optimize::OptimalCodonTable { optimal, optimal_list };
 
     let headers: Vec<String> = vec!["gene_id", "original_length", "optimized_seq"]
         .iter().map(|s| s.to_string()).collect();
@@ -51,7 +51,7 @@ pub fn run(
 
     for seq in &cds {
         let original = String::from_utf8_lossy(&seq.seq).to_string();
-        let optimized = cubar_core::optimize::codon_optimize(&original, &opt_table, &args.method);
+        let optimized = cuba_core::optimize::codon_optimize(&original, &opt_table, &args.method);
         rows.push(vec![
             seq.id.clone(),
             original.len().to_string(),
